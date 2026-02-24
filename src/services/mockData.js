@@ -2,7 +2,8 @@ export const users = [
   { id: 1, name: 'Alice Mentor', email: 'alice@company.com', password: 'password', role: 'admin' },
   { id: 2, name: 'Bob Mentor', email: 'bob@company.com', password: 'password', role: 'admin' },
   { id: 3, name: 'Charlie Student', email: 'charlie@student.com', password: 'password', role: 'student' },
-  { id: 4, name: 'Dana Student', email: 'dana@student.com', password: 'password', role: 'student' }
+  { id: 4, name: 'Dana Student', email: 'dana@student.com', password: 'password', role: 'student' },
+  { id: 5, name: 'Sowmith Samala', email: 'sowmithsamala53@gmail.com', password: 'password', role: 'student' }
 ]
 
 export let internships = [

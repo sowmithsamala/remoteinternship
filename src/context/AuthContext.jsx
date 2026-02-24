@@ -26,7 +26,18 @@ export function AuthProvider({ children }) {
         setUser(payload)
         return { success: true }
       }
-      return { success: false, message: err.response?.data?.message || 'Login failed' }
+      
+      // If user doesn't exist in mock data, create them as a student on first login (demo mode)
+      if (email && password) {
+        const newId = Math.max(...mockUsers.map(u => u.id), 0) + 1
+        const newUser = { id: newId, name: email.split('@')[0], email, password, role: 'student' }
+        mockUsers.push(newUser)
+        const payload = { id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role }
+        setUser(payload)
+        return { success: true }
+      }
+      
+      return { success: false, message: 'Please enter valid email and password' }
     }
   }
 

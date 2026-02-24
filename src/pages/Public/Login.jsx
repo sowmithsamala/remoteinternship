@@ -11,6 +11,11 @@ export default function Login() {
 
   const submit = async (e) => {
     e.preventDefault()
+    setError(null)
+    if (!email || !password) {
+      setError('Please enter both email and password')
+      return
+    }
     const res = await auth.login(email, password)
     if (res.success) {
       if (auth.user?.role === 'admin') nav('/admin')
@@ -24,11 +29,31 @@ export default function Login() {
       {error && <div className="text-red-600 mb-2">{error}</div>}
       <form onSubmit={submit} className="flex flex-col gap-2">
         <label className="text-sm">Email</label>
-        <input value={email} onChange={e => setEmail(e.target.value)} className="border p-2 rounded" />
+        <input 
+          value={email} 
+          onChange={e => setEmail(e.target.value)} 
+          className="border p-2 rounded" 
+          placeholder="Enter your email"
+        />
         <label className="text-sm">Password</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="border p-2 rounded" />
-        <button className="mt-3 bg-indigo-600 text-white px-3 py-2 rounded">Login</button>
+        <input 
+          type="password" 
+          value={password} 
+          onChange={e => setPassword(e.target.value)} 
+          className="border p-2 rounded"
+          placeholder="Enter your password"
+        />
+        <button className="mt-3 bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700">
+          Login
+        </button>
       </form>
+      
+      <div className="mt-4 pt-4 border-t text-sm text-gray-600">
+        <p className="font-semibold mb-2">Test Credentials:</p>
+        <p><strong>Admin:</strong> alice@company.com / password</p>
+        <p><strong>Student:</strong> charlie@student.com / password</p>
+        <p className="mt-2 text-xs">Or use any email with password 'password' to create an account</p>
+      </div>
     </div>
   )
 }
